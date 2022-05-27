@@ -1,0 +1,5 @@
+node_modules
+es
+.umi
+.umi-production
+.umi-test
