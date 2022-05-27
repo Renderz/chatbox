@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
 import { Button } from 'antd';
-import type { Inner } from '..';
+import type { RefType } from '..';
 import BarContainer from '..';
 
 export default () => {
-  const barRef = useRef<Inner>(null);
+  const barRef = useRef<RefType>(null);
 
   return (
     <div>
       <Button type="primary" onClick={() => barRef.current?.open()}>
-        测试
+        打开聊天框
       </Button>
       <BarContainer ref={barRef} />
     </div>
