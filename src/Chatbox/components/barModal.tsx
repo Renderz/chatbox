@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Row, Col, List, Avatar, Typography } from 'antd';
+import { Scrollbars } from 'react-custom-scrollbars';
 import { BarUtils } from '../hooks';
 
 const { Text } = Typography;
@@ -30,21 +31,23 @@ const BarModal: React.FC = () => {
   const { modalProps } = BarUtils.useContainer();
 
   return (
-    <Modal {...modalProps} width="1200px" bodyStyle={{ maxHeight: '600px', overflow: 'hidden' }}>
+    <Modal {...modalProps} width="1200px">
       <Row>
-        <Col flex="280px" style={{ maxHeight: '600px', overflowY: 'scroll', padding: '2px' }}>
-          <List
-            dataSource={siderData}
-            renderItem={(item) => (
-              <List.Item extra={item.date}>
-                <List.Item.Meta
-                  avatar={<Avatar>{item.name}</Avatar>}
-                  title={item.name}
-                  description={<Text ellipsis>{item.preview}</Text>}
-                />
-              </List.Item>
-            )}
-          />
+        <Col flex="280px" style={{ borderRight: '1px solid black' }}>
+          <Scrollbars style={{ height: '600px' }} autoHide>
+            <List
+              dataSource={siderData}
+              renderItem={(item) => (
+                <List.Item extra={item.date}>
+                  <List.Item.Meta
+                    avatar={<Avatar>{item.name}</Avatar>}
+                    title={item.name}
+                    description={<Text ellipsis>{item.preview}</Text>}
+                  />
+                </List.Item>
+              )}
+            />
+          </Scrollbars>
         </Col>
         <Col flex="1">right</Col>
       </Row>
