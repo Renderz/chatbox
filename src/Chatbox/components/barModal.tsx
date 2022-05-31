@@ -12,6 +12,14 @@ const siderData = Array.from(Array(100)).map((r, i) => ({
   preview: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
 }));
 
+const chatData = Array.from(Array(20)).map((r, i) => ({
+  id: String(i),
+  message: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
+  status: i % 3,
+  errorDesc: '网络错误',
+  from: i % 2,
+}));
+
 const BarModal: React.FC = () => {
   const { modalProps, handleClickItem, activeKey } = BarUtils.useContainer();
   const { textProps } = MessageUtils.useContainer();
@@ -52,7 +60,7 @@ const BarModal: React.FC = () => {
               lineHeight: '50px',
               fontSize: '16px',
               fontWeight: '400',
-              backgroundColor: '#fafafa',
+              backgroundColor: '#f5f5f5',
             }}
           >
             {siderData.find((r) => r.id === activeKey)?.name}
@@ -60,12 +68,29 @@ const BarModal: React.FC = () => {
           <div
             style={{
               flex: '1',
-              padding: '16px',
-              backgroundColor: '#fafafa',
+              backgroundColor: '#f5f5f5',
               borderBottom: '1px solid rgb(0 0 0 / 5%)',
             }}
           >
-            456
+            <Scrollbars>
+              {chatData.map((r) => {
+                const isLeft = r.from === 0;
+                return (
+                  <Row key={r.id} style={{ margin: '16px 0' }}>
+                    <Col
+                      {...(isLeft ? { span: 6, offset: '1' } : { span: 6, offset: 17 })}
+                      style={{
+                        ...(isLeft ? { backgroundColor: '#FFF' } : { backgroundColor: '#95de64' }),
+                        padding: '16px',
+                        borderRadius: '4px',
+                      }}
+                    >
+                      {r.message}
+                    </Col>
+                  </Row>
+                );
+              })}
+            </Scrollbars>
           </div>
           <div style={{ flex: '0 0 120px', backgroundColor: '#fafafa' }}>
             <Input.TextArea

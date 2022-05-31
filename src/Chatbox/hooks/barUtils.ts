@@ -48,21 +48,11 @@ export default createContainer((ref?: Ref<RefType>) => {
   };
 
   /**
-   * @description 发送信息
-   * @param id 用户id
-   * @param msg 消息内容
-   */
-  const send = (id: string, msg: string) => {
-    console.log(id, msg);
-  };
-
-  /**
    * @description 可被外部ref调用的方法
    */
   useImperativeHandle(ref, () => ({
     open,
     close,
-    send,
     getUnReadAmount,
     clear,
   }));
