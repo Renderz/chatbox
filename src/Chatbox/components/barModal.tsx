@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Row, Col, List, Avatar, Typography } from 'antd';
+import { Modal, Row, Col, List, Avatar, Typography, Input } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { BarUtils } from '../hooks';
 
@@ -11,21 +11,6 @@ const siderData = Array.from(Array(100)).map((r, i) => ({
   date: '17:53',
   preview: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
 }));
-
-// const siderData = [
-//   {
-//     id: 1,
-//     name: '江亦峰',
-//     date: '17:53',
-//     preview: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
-//   },
-//   {
-//     id: 2,
-//     name: '郭文龙',
-//     date: '17:53',
-//     preview: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
-//   },
-// ];
 
 const BarModal: React.FC = () => {
   const { modalProps, handleClickItem, activeKey } = BarUtils.useContainer();
@@ -66,11 +51,28 @@ const BarModal: React.FC = () => {
               lineHeight: '50px',
               fontSize: '16px',
               fontWeight: '400',
+              backgroundColor: '#fafafa',
             }}
           >
             {siderData.find((r) => r.id === activeKey)?.name}
           </div>
-          <div style={{ flex: '1' }}>456</div>
+          <div
+            style={{
+              flex: '1',
+              padding: '16px',
+              backgroundColor: '#fafafa',
+              borderBottom: '1px solid rgb(0 0 0 / 5%)',
+            }}
+          >
+            456
+          </div>
+          <div style={{ flex: '0 0 120px', backgroundColor: '#fafafa' }}>
+            <Input.TextArea
+              style={{ height: '100%', resize: 'none' }}
+              bordered={false}
+              autoSize={false}
+            />
+          </div>
         </Col>
       </Row>
     </Modal>
