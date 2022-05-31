@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Row, Col, List, Avatar, Typography, Input } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { BarUtils } from '../hooks';
+import { BarUtils, MessageUtils } from '../hooks';
 
 const { Text } = Typography;
 
@@ -14,6 +14,7 @@ const siderData = Array.from(Array(100)).map((r, i) => ({
 
 const BarModal: React.FC = () => {
   const { modalProps, handleClickItem, activeKey } = BarUtils.useContainer();
+  const { textProps } = MessageUtils.useContainer();
 
   return (
     <Modal {...modalProps} width="1200px" bodyStyle={{ padding: 0 }}>
@@ -71,6 +72,7 @@ const BarModal: React.FC = () => {
               style={{ height: '100%', resize: 'none' }}
               bordered={false}
               autoSize={false}
+              {...textProps}
             />
           </div>
         </Col>
