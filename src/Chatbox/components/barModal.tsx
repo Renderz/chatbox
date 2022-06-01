@@ -1,16 +1,7 @@
 import React from 'react';
-import { Modal, Row, Col, List, Avatar, Typography, Input } from 'antd';
+import { Modal, Row, Col, List, Avatar, Input } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { BarUtils, MessageUtils } from '../hooks';
-
-const { Text } = Typography;
-
-const siderData = Array.from(Array(100)).map((r, i) => ({
-  id: String(i),
-  name: `用户${i}`,
-  date: '17:53',
-  preview: '阿斯顿发送到发送到发送到发送到发送到发送到发送到发送到发撒打发士大夫撒地方',
-}));
+import { ModalUtils, MessageUtils, FriendUtils } from '../hooks';
 
 const chatData = Array.from(Array(20)).map((r, i) => ({
   id: String(i),
@@ -21,31 +12,27 @@ const chatData = Array.from(Array(20)).map((r, i) => ({
 }));
 
 const BarModal: React.FC = () => {
-  const { modalProps, handleClickItem, activeKey } = BarUtils.useContainer();
-  const { textProps } = MessageUtils.useContainer();
+  const modalUtils = ModalUtils.useContainer();
+  const friendUtils = FriendUtils.useContainer();
+  const messageUtils = MessageUtils.useContainer();
 
   return (
-    <Modal {...modalProps} width="1200px" bodyStyle={{ padding: 0 }}>
+    <Modal {...modalUtils.modalProps} width="1200px" bodyStyle={{ padding: 0 }}>
       <Row>
         <Col flex="280px" style={{ borderRight: '1px solid rgb(0 0 0 / 5%)' }}>
           <Scrollbars style={{ height: '600px' }} autoHide>
             <List
-              dataSource={siderData}
+              dataSource={friendUtils.friends}
               renderItem={(item) => (
                 <List.Item
-                  extra={item.date}
                   style={{
                     paddingRight: '16px',
                     paddingLeft: '16px',
-                    backgroundColor: item.id === activeKey ? '#f0f0f0' : '',
+                    backgroundColor: item.id === friendUtils.activeId ? '#f0f0f0' : '',
                   }}
-                  onClick={() => handleClickItem(item.id)}
+                  onClick={() => friendUtils.setActiveId(item.id)}
                 >
-                  <List.Item.Meta
-                    avatar={<Avatar>{item.name}</Avatar>}
-                    title={item.name}
-                    description={<Text ellipsis>{item.preview}</Text>}
-                  />
+                  <List.Item.Meta avatar={<Avatar>{item.name}</Avatar>} title={item.name} />
                 </List.Item>
               )}
             />
@@ -63,7 +50,7 @@ const BarModal: React.FC = () => {
               backgroundColor: '#f5f5f5',
             }}
           >
-            {siderData.find((r) => r.id === activeKey)?.name}
+            {friendUtils.activeFriend?.name}
           </div>
           <div
             style={{
@@ -97,7 +84,7 @@ const BarModal: React.FC = () => {
               style={{ height: '100%', resize: 'none' }}
               bordered={false}
               autoSize={false}
-              {...textProps}
+              {...messageUtils.textProps}
             />
           </div>
         </Col>

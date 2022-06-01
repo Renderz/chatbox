@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import type { TextAreaProps } from 'antd/es/input';
 import { createContainer } from 'unstated-next';
-import { BarUtils } from '../hooks';
+import { FriendUtils } from '../hooks';
 
 const useMessage = () => {
-  const { activeKey } = BarUtils.useContainer();
+  const friendUtils = FriendUtils.useContainer();
 
   const [value, setValue] = useState<string>();
 
@@ -39,8 +39,12 @@ const useMessage = () => {
 
       if (isNewLine) {
         setValue(`${value || ''}\n`);
-      } else if (activeKey !== undefined && value?.trim() !== undefined && value.trim() !== '') {
-        send(activeKey, value);
+      } else if (
+        friendUtils.activeId !== undefined &&
+        value?.trim() !== undefined &&
+        value.trim() !== ''
+      ) {
+        send(friendUtils.activeId, value);
       }
     },
     placeholder: 'Enter发送',
@@ -51,7 +55,7 @@ const useMessage = () => {
    */
   useEffect(() => {
     reset();
-  }, [activeKey]);
+  }, [friendUtils.activeId]);
 
   return {
     send,
