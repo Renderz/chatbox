@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Row, Col, List, Avatar, Input } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { ModalUtils, MessageUtils, FriendUtils } from '../hooks';
+import './index.less';
 
 const chatData = Array.from(Array(20)).map((r, i) => ({
   id: String(i),
@@ -17,7 +18,15 @@ const BarModal: React.FC = () => {
   const messageUtils = MessageUtils.useContainer();
 
   return (
-    <Modal {...modalUtils.modalProps} width="1200px" bodyStyle={{ padding: 0 }}>
+    <Modal
+      // wrapClassName="ant-design-draggable-modal"
+      {...modalUtils.modalProps}
+      width="1200px"
+      bodyStyle={{ padding: 0 }}
+      mask={false}
+      maskClosable={false}
+      wrapClassName="ant-design-draggable-modal"
+    >
       <Row>
         <Col flex="280px" style={{ borderRight: '1px solid rgb(0 0 0 / 5%)' }}>
           <Scrollbars style={{ height: '600px' }} autoHide>
